@@ -2,7 +2,8 @@
 
 use Phalcon\Mvc\ModelInterface,
 	Phalcon\Mvc\Model\Relation,
-	Phalcon\Mvc\Model\Resultset\Simple;
+	Phalcon\Mvc\Model\Resultset\Simple,
+	Phalcon\Mvc\Model\Resultsetinterface;
 
 final class Loader {
 	const E_INVALID_SUBJECT = 'Expected value of `subject` is either a ModelInterface object, a Simple object or an array of ModelInterface objects';
@@ -17,7 +18,7 @@ final class Loader {
 	protected $mustReturnAModel;
 
 	/**
-	 * @param ModelInterface|ModelInterface[]|Simple $from
+	 * @param ModelInterface|ModelInterface[]|Simple|Resultsetinterface $from
 	 * @param array $arguments
 	 * @throws \InvalidArgumentException
 	 */
@@ -99,7 +100,7 @@ final class Loader {
 	/**
 	 * Create and get from a mixed $subject
 	 *
-	 * @param ModelInterface|ModelInterface[]|Simple $subject
+	 * @param ModelInterface|ModelInterface[]|Simple|Resultsetinterface $subject
 	 * @param mixed ...$arguments
 	 * @throws \InvalidArgumentException
 	 * @return mixed
@@ -164,7 +165,7 @@ final class Loader {
 			$ret = $ret[0];
 		}
 
-		return $ret;
+		return ($ret) ? $ret : array();
 	}
 
 	/**
