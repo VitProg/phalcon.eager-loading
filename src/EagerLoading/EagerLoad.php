@@ -205,14 +205,16 @@ final class EagerLoad {
 				$indexedRecords = [];
 
 				// Keep all records in memory
-				foreach ($builder->getQuery()->execute() as $record) {
-					$records[] = $record;
+				if ($bindValues) {
+					foreach ($builder->getQuery()->execute() as $record) {
+						$records[] = $record;
 
-					if ($isSingle) {
-						$indexedRecords[$record->readAttribute($relReferencedField)] = $record;
-					}
-					else {
-						$indexedRecords[$record->readAttribute($relReferencedField)][] = $record;
+						if ($isSingle) {
+							$indexedRecords[$record->readAttribute($relReferencedField)] = $record;
+						}
+						else {
+							$indexedRecords[$record->readAttribute($relReferencedField)][] = $record;
+						}
 					}
 				}
 
