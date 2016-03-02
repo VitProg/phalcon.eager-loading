@@ -76,7 +76,7 @@ final class EagerLoad {
 			$bindValues[$record->readAttribute($relField)] = TRUE;
 		}
 
-		$bindValues = array_keys($bindValues);
+		$bindValues = array_keys(array_filter($bindValues));
 		if (!$bindValues) {
 			return $this;
 		}
