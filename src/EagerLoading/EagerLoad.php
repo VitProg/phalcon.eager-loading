@@ -77,9 +77,6 @@ final class EagerLoad {
 		}
 
 		$bindValues = array_filter(array_keys($bindValues));
-		if (!$bindValues) {
-			return $this;
-		}
 
 		$subjectSize         = count($this->parent->getSubject());
 		$isManyToManyForMany = FALSE;
