@@ -137,8 +137,10 @@ final class EagerLoad {
 		$records = [];
 
 		if ($isManyToManyForMany) {
-			foreach ($builder->getQuery()->execute() as $record) {
-				$records[$record->readAttribute($relReferencedField)] = $record;
+			if ($bindValues) {
+				foreach ($builder->getQuery()->execute() as $record) {
+					$records[$record->readAttribute($relReferencedField)] = $record;
+				}
 			}
 
 			foreach ($this->parent->getSubject() as $record) {
