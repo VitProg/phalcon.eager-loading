@@ -106,13 +106,15 @@ final class EagerLoad {
 				// extra query
 				$isManyToManyForMany = TRUE;
 
-				$relIrValues = (new QueryBuilder)
-					->from($relIrModel)
-					->inWhere("[{$relIrModel}].[{$relIrField}]", $bindValues)
-					->getQuery()
-					->execute()
-					->setHydrateMode(Resultset::HYDRATE_ARRAYS)
-				;
+				if ($bindValues) {
+					$relIrValues = (new QueryBuilder)
+						->from($relIrModel)
+						->inWhere("[{$relIrModel}].[{$relIrField}]", $bindValues)
+						->getQuery()
+						->execute()
+						->setHydrateMode(Resultset::HYDRATE_ARRAYS)
+					;
+				}
 
 				$bindValues = $modelReferencedModelValues = [];
 				
