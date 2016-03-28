@@ -117,10 +117,12 @@ final class EagerLoad {
 				}
 
 				$bindValues = $modelReferencedModelValues = [];
-				
-				foreach ($relIrValues as $row) {
-					$bindValues[$row[$relIrReferencedField]] = TRUE;
-					$modelReferencedModelValues[$row[$relIrField]][$row[$relIrReferencedField]] = TRUE;
+
+				if ($relIrValues) {
+					foreach ($relIrValues as $row) {
+						$bindValues[$row[$relIrReferencedField]] = TRUE;
+						$modelReferencedModelValues[$row[$relIrField]][$row[$relIrReferencedField]] = TRUE;
+					}
 				}
 
 				unset ($relIrValues, $row);
