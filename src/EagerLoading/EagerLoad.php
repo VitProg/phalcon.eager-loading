@@ -106,7 +106,7 @@ final class EagerLoad {
 				// extra query
 				$isManyToManyForMany = TRUE;
 
-				if ($bindValues) {
+				if (isset($bindValues)) {
 					$relIrValues = (new QueryBuilder)
 						->from($relIrModel)
 						->inWhere("[{$relIrModel}].[{$relIrField}]", $bindValues)
